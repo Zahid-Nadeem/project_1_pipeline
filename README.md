@@ -1,18 +1,58 @@
-title,price_gbp
-A Light in the Attic,51.77
-Tipping the Velvet,53.74
-Soumission,50.1
-Sharp Objects,47.82
-Sapiens: A Brief History of Humankind,54.23
-The Requiem Red,22.65
-The Dirty Little Secrets of Getting Your Dream Job,33.34
-"The Coming Woman: A Novel Based on the Life of the Infamous Feminist, Victoria Woodhull",17.93
-The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics,22.6
-The Black Maria,52.15
-"Starving Hearts (Triangular Trade Trilogy, #1)",13.99
-Shakespeare's Sonnets,20.66
-Set Me Free,17.46
-Scott Pilgrim's Precious Little Life (Scott Pilgrim #1),52.29
-Rip it Up and Start Again,35.02
-"Our Band Could Be Your Life: Scenes from the American Indie Underground, 1981-1991",57.25
-Olio,23.88
+# Multi-Page Bookstore Scraping & Data Engineering Pipeline
+
+A modular, production-ready ETL pipeline designed to crawl an entire e-commerce storefront catalog sequentially, handle relative URL pagination layouts dynamically, and export a sanitized dataset ready for analytics or machine learning consumption patterns.
+
+## Technical Architecture
+
+* **Relative Link Resolution:** Integrates Python's native `urllib.parse.urljoin` utility to reconstruct absolute routing endpoints dynamically from structural pagination fragments (`href`), eliminating rigid hard-coded folder strings.
+* **Modular Clean Segmentation:** Implements single-responsibility design principles across isolated functions for network handling (`get_soup`), DOM processing (`parse_books`), and data orchestration workflows (`run`).
+* **Production-Grade Log Tracking:** Utilizes standard `logging` levels (`INFO`, `ERROR`, `WARNING`) rather than simple standard terminal printing to systematically capture execution paths and connection thresholds.
+* **Typing & Schema Consistency:** Deploys a Pandas data engineering execution pattern to strip non-numeric character metrics (`£`), cast raw fields cleanly into appropriate computational formats (`float`), and structure database-ingestion ready CSV datasets.
+
+## Component Stack
+
+* **Language Platform:** Python 3.14+
+* **Data Processing:** `pandas`
+* **Parsing Utilities:** `beautifulsoup4`, `urllib.parse`
+* **Networking Infrastructure:** `requests`
+
+## Operational Blueprint
+
+```text
+[Initial Page Request] ──> [get_soup Request Guard] ──> [BeautifulSoup Node Loop]
+                                                                │
+[CSV Target Export]  <── [Pandas Clean Pipeline]  <── [urljoin Target Loops]
+```
+
+## System Deployment
+
+### 1. Project Prerequisites
+Initialize and activate your localized virtual environment tracking layer:
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+### 2. Install Required Dependencies
+Install the standard system interaction libraries inside your active isolated environment workspace:
+
+```powershell
+pip install requests beautifulsoup4 pandas lxml
+```
+
+### 3. Run the Pipeline Execution Agent
+Run the main script directly using the terminal configuration prompt:
+
+```powershell
+python project_1_pipeline.py
+```
+
+## Dataset Specifications
+
+The pipeline formats records cleanly and writes the final rows directly to `sanitized_product_feed.csv` adhering to the following structural output layout:
+
+| Attribute Header | Data Format Type | Functional Field Description |
+| :--- | :--- | :--- |
+| `title` | String / Text | The complete un-truncated book heading extracted natively from the anchor attribute node block. |
+| `price_gbp` | Floating-point (Float) | Standardized product value layout with transactional currency markers completely scrubbed out. |
